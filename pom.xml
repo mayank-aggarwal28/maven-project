@@ -17,8 +17,8 @@
 		<project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
 		<sonar.projectKey>SonarJenkins2</sonar.projectKey>
 		<sonar.projectName>Sonar 2 Jenkins</sonar.projectName>
-		<sonar.projectVersion>1.0</sonar.projectVersion>
 		<sonar.sources>src</sonar.sources>
+		<sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
 	</properties>
 
 	<modules>
@@ -49,6 +49,31 @@
 				<configuration>
 					<autoVersionSubmodules>true</autoVersionSubmodules>
 				</configuration>
+			</plugin>
+			
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>sonar-properties-replacement</id>
+						<phase>build</phase>
+						<configuration>
+							<target>
+								<propertyFile file="${basedir}/sonar-project.properties">
+									<entry key="sonar.projectKey" value="${sonar.projectKey}" />
+									<entry key="sonar.projectName" value ="$(sonar.projectName)" />
+									<entry key="sonar.projectVersion" value="${project.version}" />
+									<entry key="sonar.sources" value="${sonar.sources}" />
+									<entry key="sonar.sourceEncoding" value="$(sonar.sourceEncoding)" />
+								</propertyFile>
+								<replaceregexp file="${basedir}/sonar-project.properties" match="^#.*\n" replace=""/>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 
 			<plugin>
