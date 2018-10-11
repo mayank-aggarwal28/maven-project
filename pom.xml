@@ -50,7 +50,7 @@
 					<autoVersionSubmodules>true</autoVersionSubmodules>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<executions>
@@ -59,14 +59,20 @@
 						<phase>build</phase>
 						<configuration>
 							<target>
-								<propertyFile file="${basedir}/sonar-project.properties">
+								<propertyFile
+									file="${basedir}/sonar-project.properties">
 									<entry key="sonar.projectKey" value="${sonar.projectKey}" />
-									<entry key="sonar.projectName" value ="$(sonar.projectName)" />
-									<entry key="sonar.projectVersion" value="${project.version}" />
+									<entry key="sonar.projectName"
+										value="$(sonar.projectName)" />
+									<entry key="sonar.projectVersion"
+										value="${project.version}" />
 									<entry key="sonar.sources" value="${sonar.sources}" />
-									<entry key="sonar.sourceEncoding" value="$(sonar.sourceEncoding)" />
+									<entry key="sonar.sourceEncoding"
+										value="$(sonar.sourceEncoding)" />
 								</propertyFile>
-								<replaceregexp file="${basedir}/sonar-project.properties" match="^#.*\n" replace=""/>
+								<replaceregexp
+									file="${basedir}/sonar-project.properties" match="^#.*\n"
+									replace="" />
 							</target>
 						</configuration>
 						<goals>
@@ -76,7 +82,7 @@
 				</executions>
 			</plugin>
 
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>sonar-maven-plugin</artifactId>
 				<executions>
@@ -89,7 +95,7 @@
 					</execution>
 				</executions>
 				<version>2.1</version>
-			</plugin>
+			</plugin> -->
 
 			<plugin>
 				<artifactId>maven-site-plugin</artifactId>
@@ -134,6 +140,15 @@
 				<plugin>
 					<groupId>org.sonarsource.scanner.maven</groupId>
 					<artifactId>sonar-maven-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>s1</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>sonar</goal>
+							</goals>
+						</execution>
+					</executions>
 					<version>2.4</version>
 				</plugin>
 				<plugin>
