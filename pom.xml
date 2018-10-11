@@ -56,7 +56,7 @@
 				<executions>
 					<execution>
 						<id>sonar-properties-replacement</id>
-						<phase>build</phase>
+						<phase>package</phase>
 						<configuration>
 							<target>
 								<propertyFile
