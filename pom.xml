@@ -80,6 +80,7 @@
 						</goals>
 					</execution>
 				</executions>
+				<version>1.8</version>
 			</plugin>
 
 			<!-- <plugin>
